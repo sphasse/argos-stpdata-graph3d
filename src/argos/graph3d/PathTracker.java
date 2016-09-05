@@ -16,6 +16,7 @@ import org.jzy3d.plot3d.rendering.canvas.Quality;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import argos.graph3d.datasource.DataSource;
+import argos.graph3d.datasource.StepDataPoint;
 
 public class PathTracker extends AbstractAnalysis {
 	public static float duration = 600.0F;
@@ -31,7 +32,7 @@ public class PathTracker extends AbstractAnalysis {
 				"applicationContext.xml");
 		context.registerShutdownHook();
 		
-		DataSource d = context.getBean(DataSource.class);
+		DataSource d = context.getBean("datasource", DataSource.class);
 
 		d.init();
 
@@ -163,7 +164,8 @@ public class PathTracker extends AbstractAnalysis {
 		Coord3d previous = null;
 		for (int j = 0; j < 2000; j++) {
 
-			Coord3d point = datasource.getNextCoord();
+			StepDataPoint datapoint = datasource.getNextStepData();
+			Coord3d point = new Coord3d(datapoint.x, datapoint.y, datapoint.z);
 
 			if (previous == null) {
 				previous = point;

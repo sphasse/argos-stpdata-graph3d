@@ -24,7 +24,7 @@ public class UDPDataSource implements DataSource {
 		}
 	}
 
-	public Coord3d getNextCoord() {
+	public StepDataPoint getNextStepData() {
 
 		DatagramPacket packet;
 		    byte[] buf = new byte[256];
@@ -43,7 +43,8 @@ public class UDPDataSource implements DataSource {
 		    float x = Float.parseFloat(floatString[0]);
 		    float y = Float.parseFloat(floatString[1]);
 		    float z = Float.parseFloat(floatString[2]);
-			return new Coord3d(x, y, z);
+		    
+			return new StepDataPoint(x, y, z);
 
 
 	}

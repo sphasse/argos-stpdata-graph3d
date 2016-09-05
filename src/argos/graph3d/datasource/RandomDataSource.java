@@ -21,7 +21,7 @@ public class RandomDataSource implements DataSource {
 	public void destroy() {}
 
 
-	public Coord3d getNextCoord() {
+	public StepDataPoint getNextStepData() {
 
 		float dx = 0.05F * (r.nextFloat() - 0.5F);
 		float dy = 0.05F * (r.nextFloat() - 0.5F);
@@ -38,7 +38,7 @@ public class RandomDataSource implements DataSource {
 			e.printStackTrace();
 		}
 		
-		return new Coord3d(x, y, z);
+		return new StepDataPoint(x, y, z);
 	}
 
 }

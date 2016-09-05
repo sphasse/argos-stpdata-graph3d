@@ -5,5 +5,10 @@
 http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">
 
 	<!-- bean id="datasource" class="argos.graph3d.datasource.RandomDataSource"></bean>-->
-	<bean id="datasource" class="argos.graph3d.datasource.UDPDataSource"></bean>
+	<!-- bean id="datasource" class="argos.graph3d.datasource.UDPDataSource"></bean>-->
+	<bean id="datasource" class="argos.graph3d.datasource.StepByStepFilter">
+	      <constructor-arg ref="rawData"/>
+	</bean>
+	<bean id="rawData" class="argos.graph3d.datasource.LogFileDataSource"></bean>
+	
 </beans>
