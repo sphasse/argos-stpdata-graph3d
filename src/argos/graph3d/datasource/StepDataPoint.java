@@ -24,7 +24,28 @@ public static boolean FOOT_UP = false;
 		this.footSwitch = footSwitch;
 	}
 	
+	public static StepDataPoint parseFromString(String line) {
+		StepDataPoint accel = null;
+	    if (line != null) {
+	    	//System.out.println("line [" + line + "]");
+	    	String[] items = line.split("\\s+");
+	    	float currentTimestamp = Float.parseFloat(items[0]);
+	    	float stepInt = Integer.parseInt(items[1]);
+	    	float xAccel = Float.parseFloat(items[2]);
+	    	float yAccel = Float.parseFloat(items[3]);
+	    	float zAccel = Float.parseFloat(items[4]);
+	    	boolean footSwitch = StepDataPoint.FOOT_DOWN;
+	    	if (stepInt == 1) {
+	    		footSwitch = StepDataPoint.FOOT_DOWN;
+	    	} else {
+	    		footSwitch = StepDataPoint.FOOT_UP;
+	    	}
+	    	accel = new StepDataPoint(xAccel, yAccel, zAccel, currentTimestamp, footSwitch);
+	    }
+	    return accel;
+	}
+	
 	public String toString() {
-		return String.format("%f.0 %d %.6f %.6f %.6f", timestamp, footSwitch ? 1 : 0, x, y, z);
+		return String.format("%.0f %d %.6f %.6f %.6f", timestamp, footSwitch ? 1 : 0, x, y, z);
 	}
 }

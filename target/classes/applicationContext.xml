@@ -6,12 +6,20 @@ http://www.springframework.org/schema/beans http://www.springframework.org/schem
 
 	<!-- bean id="datasource" class="argos.graph3d.datasource.RandomDataSource"></bean>-->
 	<!-- bean id="datasource" class="argos.graph3d.datasource.UDPDataSource"></bean>-->
+<!-- Config for local graphing with logging 
 	<bean id="datasource" class="argos.graph3d.datasource.StepByStepFilter">
 	      <constructor-arg ref="logger"/>
 	</bean>
 	<bean id="logger" class="argos.graph3d.datasource.LoggingFilter">
 	      <constructor-arg ref="rawData"/>
 	</bean>
-	<bean id="rawData" class="argos.graph3d.datasource.SerialDataSource"></bean>
-	
+	<bean id="rawData" class="argos.graph3d.datasource.SerialDataSource"></bean>	
+-->
+	<bean id="datasource" class="argos.graph3d.datasource.StepByStepFilter">
+	      <constructor-arg ref="logger"/>
+	</bean>
+	<bean id="logger" class="argos.graph3d.datasource.LoggingFilter">
+	      <constructor-arg ref="rawData"/>
+	</bean>
+	<bean id="rawData" class="argos.graph3d.datasource.UDPDataSource"></bean>	
 </beans>

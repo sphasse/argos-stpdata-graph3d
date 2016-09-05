@@ -29,21 +29,7 @@ public class LogFileDataSource implements DataSource {
 			line = br.readLine();
 
 		    if (line != null) {
-		    	String[] items = line.split("\\s+");
-		    	float currentTimestamp = Float.parseFloat(items[0]);
-		    	float stepInt = Integer.parseInt(items[1]);
-		    	float xAccel = Float.parseFloat(items[2]);
-		    	float yAccel = Float.parseFloat(items[3]);
-		    	float zAccel = Float.parseFloat(items[4]);
-		    	boolean footSwitch = StepDataPoint.FOOT_DOWN;
-		    	System.out.println("stepInt is " + stepInt);
-		    	if (stepInt == 1) {
-		    		footSwitch = StepDataPoint.FOOT_DOWN;
-		    	} else {
-		    		footSwitch = StepDataPoint.FOOT_UP;
-		    	}
-		    	System.out.println("footSwitch is " + footSwitch);
-		    	StepDataPoint accel = new StepDataPoint(xAccel, yAccel, zAccel, currentTimestamp, footSwitch);
+		    	StepDataPoint accel = StepDataPoint.parseFromString(line);
 		    	StepDataPoint position = processor.process(accel); 
 		    	this.position = position;
 		    } else {

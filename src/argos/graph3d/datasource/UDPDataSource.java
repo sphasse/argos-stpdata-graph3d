@@ -7,13 +7,20 @@ import java.net.MulticastSocket;
 
 import org.jzy3d.maths.Coord3d;
 
+import argos.graph3d.processor.SimpleProcessor;
+import argos.graph3d.processor.StepDataProcessor;
+
 public class UDPDataSource implements DataSource {
 
 
 	MulticastSocket socket;
 	InetAddress group;
+	private StepDataProcessor processor;
+
 	
 	public void init() {
+		processor = new SimpleProcessor();
+
 		try {
 			socket = new MulticastSocket(4446);
 			group = InetAddress.getByName("224.67.67.67");
@@ -37,14 +44,12 @@ public class UDPDataSource implements DataSource {
 			}
 
 		    String received = new String(packet.getData());
-		    System.out.println("Quote of the Moment: " + received);
-		    String[] floatString = received.split("[, ]");
+	    	StepDataPoint accel = StepDataPoint.parseFromString(received);
 
-		    float x = Float.parseFloat(floatString[0]);
-		    float y = Float.parseFloat(floatString[1]);
-		    float z = Float.parseFloat(floatString[2]);
-		    
-			return new StepDataPoint(x, y, z);
+		    //System.out.println("Quote of the Moment: " + received);
+	    	StepDataPoint position = processor.process(accel); 
+
+			return position;
 
 
 	}

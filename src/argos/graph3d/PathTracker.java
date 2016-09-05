@@ -162,7 +162,8 @@ public class PathTracker extends AbstractAnalysis {
 
 	private void graphRealTime() {
 		Coord3d previous = null;
-		for (int j = 0; j < 2000; j++) {
+		//for (int j = 0; j < 2000; j++) {
+		while (true) {
 
 			StepDataPoint datapoint = datasource.getNextStepData();
 			Coord3d point = new Coord3d(datapoint.x, datapoint.y, datapoint.z);
