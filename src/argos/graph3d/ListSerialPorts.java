@@ -1,7 +1,7 @@
 package argos.graph3d;
 
-import java.io.PrintStream;
 import java.util.Enumeration;
+
 import purejavacomm.CommPortIdentifier;
 
 public class ListSerialPorts
