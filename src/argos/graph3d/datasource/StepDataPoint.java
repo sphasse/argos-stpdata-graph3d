@@ -23,4 +23,8 @@ public static boolean FOOT_UP = false;
 		this.timestamp = timestamp;
 		this.footSwitch = footSwitch;
 	}
+	
+	public String toString() {
+		return String.format("%f.0 %d %.6f %.6f %.6f", timestamp, footSwitch ? 1 : 0, x, y, z);
+	}
 }
